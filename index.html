@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <head>
-    <meta name="description" content="This is the Etch-A-Sketch project from The Odin Project as created
-    by Eric Ryan on May 28th, 2020.">
+    <meta name="description" content="This is the Etch-A-Sketch project from The Odin Project
+    as created by Eric Ryan on May 28th, 2020.">
 </head>
 
 <style>
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(16, 6%);
+    grid-template-rows: repeat(16, 6%);
+}
+
+#purple-background {
+    background-color: purple;
+}
 
 </style>
 
 <body>
 
+<div id="grid-container">
+
+</div>
+
 </body>
 
 <script>
-    
+for (let i=0; i<256; i++) {
+    const div = document.createElement("div");
+    div.textContent = i;
+    div.addEventListener("mouseover", () => changeColor(div));
+    const gridcontainer = document.querySelector("#grid-container");
+    gridcontainer.appendChild(div);
+}
+
+
+function changeColor(element) {
+    element.style.backgroundColor = "purple";
+    console.log("she work");
+
+}
+
 </script>
 
 
