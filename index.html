@@ -7,17 +7,23 @@
 <style>
 #grid-container {
     display: grid;
-    grid-template-columns: repeat(16, 6%);
-    grid-template-rows: repeat(16, 6%);
+    grid-template-columns: repeat(16, 40px);
+    grid-template-rows: repeat(16, 40px);
 }
 
-#purple-background {
-    background-color: purple;
+.grid-element {
+    border-style: solid;
+    border-width: 2px;
+    border-color: grey;
 }
+
+
 
 </style>
 
 <body>
+
+<button type="button" id="clear-grid">Clear Grid</button>    
 
 <div id="grid-container">
 
@@ -28,6 +34,7 @@
 <script>
 for (let i=0; i<256; i++) {
     const div = document.createElement("div");
+    div.classList.add("grid-element");
     div.textContent = i;
     div.addEventListener("mouseover", () => changeColor(div));
     const gridcontainer = document.querySelector("#grid-container");
@@ -37,8 +44,17 @@ for (let i=0; i<256; i++) {
 
 function changeColor(element) {
     element.style.backgroundColor = "purple";
-    console.log("she work");
+}
 
+const clear = document.querySelector("#clear-grid");
+clear.addEventListener("click", clearGrid);
+
+function clearGrid() {
+    const div = document.querySelectorAll(".grid-element");
+    
+    for( let i=0; i<div.length; i++) {
+    div[i].style.backgroundColor = "transparent";
+    }
 }
 
 </script>
