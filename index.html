@@ -7,6 +7,8 @@
 <style>
 #grid-container {
     display: grid;
+    width: 1000px;
+    height: 1000px;
     grid-template-columns: repeat(16, 40px);
     grid-template-rows: repeat(16, 40px);
 }
@@ -32,13 +34,19 @@
 </body>
 
 <script>
-for (let i=0; i<256; i++) {
-    const div = document.createElement("div");
-    div.classList.add("grid-element");
-    div.textContent = i;
-    div.addEventListener("mouseover", () => changeColor(div));
-    const gridcontainer = document.querySelector("#grid-container");
-    gridcontainer.appendChild(div);
+
+let gridSize = 16;
+newGrid();
+
+function newGrid() {
+    for (let i=0; i<(gridSize**2); i++) {
+        const div = document.createElement("div");
+        div.classList.add("grid-element");
+        div.textContent = i;
+        div.addEventListener("mouseover", () => changeColor(div));
+        const gridcontainer = document.querySelector("#grid-container");
+        gridcontainer.appendChild(div);
+    }
 }
 
 
@@ -50,12 +58,16 @@ const clear = document.querySelector("#clear-grid");
 clear.addEventListener("click", clearGrid);
 
 function clearGrid() {
-    const div = document.querySelectorAll(".grid-element");
+    const div = document.querySelector("#grid-container");
     
-    for( let i=0; i<div.length; i++) {
-    div[i].style.backgroundColor = "transparent";
+    while (div.firstChild) {
+        div.removeChild(div.lastChild);
     }
+
+    gridSize = prompt("How many sqaures would you like along the sides of the new grid?");
+    newGrid()
 }
+
 
 </script>
 
