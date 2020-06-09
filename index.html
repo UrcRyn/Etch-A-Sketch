@@ -7,10 +7,10 @@
 <style>
 #grid-container {
     display: grid;
-    width: 1000px;
-    height: 1000px;
-    grid-template-columns: repeat(16, 40px);
-    grid-template-rows: repeat(16, 40px);
+    width: 750px;
+    height: 750px;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
 }
 
 .grid-element {
@@ -42,9 +42,10 @@ function newGrid() {
     for (let i=0; i<(gridSize**2); i++) {
         const div = document.createElement("div");
         div.classList.add("grid-element");
-        div.textContent = i;
         div.addEventListener("mouseover", () => changeColor(div));
         const gridcontainer = document.querySelector("#grid-container");
+        gridcontainer.style.gridTemplateColumns = "repeat(" + gridSize + ", 1fr)";
+        gridcontainer.style.gridTemplateRows = "repeat(" + gridSize + ", 1fr)";
         gridcontainer.appendChild(div);
     }
 }
