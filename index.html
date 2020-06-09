@@ -25,11 +25,12 @@
 
 <body>
 
-<button type="button" id="clear-grid">Clear Grid</button>    
+<button type="button" id="clear-grid">Clear Grid</button> 
+<button type="button" id="purple">Purple</button>  
+<button type="button" id="yellow">Yellow</button>
+<button type="button" id="random">Randomize!</button>
 
-<div id="grid-container">
-
-</div>
+<div id="grid-container"></div>
 
 </body>
 
@@ -37,6 +38,18 @@
 
 let gridSize = 16;
 newGrid();
+
+let drawColor = "purple";
+const purple = document.querySelector("#purple");
+purple.addEventListener("click", () => drawColor = "purple");
+
+const yellow = document.querySelector("#yellow");
+yellow.addEventListener("click", () => drawColor = "yellow");
+
+const randomColor = document.querySelector("#random");
+randomColor.addEventListener("click", () => drawColor = "random");
+
+
 
 function newGrid() {
     for (let i=0; i<(gridSize**2); i++) {
@@ -51,9 +64,23 @@ function newGrid() {
 }
 
 
-function changeColor(element) {
-    element.style.backgroundColor = "purple";
+function getRandomColor() {
+    let rgbValues = [];
+    for (let k=0; k<3; k++) {
+        rgbValues[k] = Math.floor(Math.random() * Math.floor(255));
+    }
+    return rgbValues;
 }
+
+function changeColor(element) {
+    if (drawColor == "random"){
+        randomRGB = getRandomColor();
+        element.style.backgroundColor = "rgb(" + randomRGB[0] + "," + randomRGB[1] + "," + randomRGB[2] + ")";
+    } else {
+        element.style.backgroundColor = drawColor;
+    }
+}
+
 
 const clear = document.querySelector("#clear-grid");
 clear.addEventListener("click", clearGrid);
